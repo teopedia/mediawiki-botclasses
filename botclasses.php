@@ -439,13 +439,11 @@ class wikipedia {
 
     /**
      * This function returns the edit token for the current user.
-     * @return edit token.
+     * @return edit (csrf) token.
      **/
     function getedittoken () {
-        $x = $this->query('?action=query&prop=info&intoken=edit&titles=Main%20Page&format=php');
-        foreach ($x['query']['pages'] as $ret) {
-            return $ret['edittoken'];
-        }
+        $x = $this->query('?action=query&meta=tokens&type=csrf&format=php');
+        return $x['query']['tokens']['csrftoken'];
     }
 
     /**
